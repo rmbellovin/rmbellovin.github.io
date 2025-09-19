@@ -1,425 +1,109 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
-<head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Even and Odd Permutations</title>
-  <style>
-    html {
-      color: #1a1a1a;
-      background-color: #fdfdfd;
-    }
-    body {
-      margin: 0 auto;
-      max-width: 36em;
-      padding-left: 50px;
-      padding-right: 50px;
-      padding-top: 50px;
-      padding-bottom: 50px;
-      hyphens: auto;
-      overflow-wrap: break-word;
-      text-rendering: optimizeLegibility;
-      font-kerning: normal;
-    }
-    @media (max-width: 600px) {
-      body {
-        font-size: 0.9em;
-        padding: 12px;
-      }
-      h1 {
-        font-size: 1.8em;
-      }
-    }
-    @media print {
-      html {
-        background-color: white;
-      }
-      body {
-        background-color: transparent;
-        color: black;
-        font-size: 12pt;
-      }
-      p, h2, h3 {
-        orphans: 3;
-        widows: 3;
-      }
-      h2, h3, h4 {
-        page-break-after: avoid;
-      }
-    }
-    p {
-      margin: 1em 0;
-    }
-    a {
-      color: #1a1a1a;
-    }
-    a:visited {
-      color: #1a1a1a;
-    }
-    img {
-      max-width: 100%;
-    }
-    h1, h2, h3, h4, h5, h6 {
-      margin-top: 1.4em;
-    }
-    h5, h6 {
-      font-size: 1em;
-      font-style: italic;
-    }
-    h6 {
-      font-weight: normal;
-    }
-    ol, ul {
-      padding-left: 1.7em;
-      margin-top: 1em;
-    }
-    li > ol, li > ul {
-      margin-top: 0;
-    }
-    blockquote {
-      margin: 1em 0 1em 1.7em;
-      padding-left: 1em;
-      border-left: 2px solid #e6e6e6;
-      color: #606060;
-    }
-    code {
-      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
-      font-size: 85%;
-      margin: 0;
-      hyphens: manual;
-    }
-    pre {
-      margin: 1em 0;
-      overflow: auto;
-    }
-    pre code {
-      padding: 0;
-      overflow: visible;
-      overflow-wrap: normal;
-    }
-    .sourceCode {
-     background-color: transparent;
-     overflow: visible;
-    }
-    hr {
-      background-color: #1a1a1a;
-      border: none;
-      height: 1px;
-      margin: 1em 0;
-    }
-    table {
-      margin: 1em 0;
-      border-collapse: collapse;
-      width: 100%;
-      overflow-x: auto;
-      display: block;
-      font-variant-numeric: lining-nums tabular-nums;
-    }
-    table caption {
-      margin-bottom: 0.75em;
-    }
-    tbody {
-      margin-top: 0.5em;
-      border-top: 1px solid #1a1a1a;
-      border-bottom: 1px solid #1a1a1a;
-    }
-    th {
-      border-top: 1px solid #1a1a1a;
-      padding: 0.25em 0.5em 0.25em 0.5em;
-    }
-    td {
-      padding: 0.125em 0.5em 0.25em 0.5em;
-    }
-    header {
-      margin-bottom: 4em;
-      text-align: center;
-    }
-    #TOC li {
-      list-style: none;
-    }
-    #TOC ul {
-      padding-left: 1.3em;
-    }
-    #TOC > ul {
-      padding-left: 0;
-    }
-    #TOC a:not(:hover) {
-      text-decoration: none;
-    }
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-  </style>
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="/usr/share/javascript/mathjax/MathJax.js"
-  type="text/javascript"></script>
-</head>
-<body>
-<header id="title-block-header">
-<h1 class="title">Even and Odd Permutations</h1>
-</header>
-<p>This is a short note to describe explicitly which elements of <span
-class="math inline">\(S_4\)</span> (the symmetric group on <span
-class="math inline">\(4\)</span> elements) and <span
-class="math inline">\(D_4\)</span> (the symmetries of a square) are even
-and which are odd. Recall that we can write every permutation <span
-class="math inline">\(\sigma\)</span> as a product of transpositions;
-then <span class="math inline">\(\sigma\)</span> is <em>even</em> if it
-is the product of an even number of transpositions, and <em>odd</em> if
-it is the product of an odd number of transpositions.</p>
-<h1 id="d_4"><span class="math inline">\(D_4\)</span></h1>
-<p>Let’s number the vertices of our square as <span
-class="math inline">\(1\)</span>, <span
-class="math inline">\(2\)</span>, <span
-class="math inline">\(3\)</span>, and <span
-class="math inline">\(4\)</span> (in order as we go around the square
-clockwise). In class we described the symmetries explicitly: There are
-<span class="math inline">\(4\)</span> rotations of the square, which we
-can write as permutations <span class="math display">\[e, \qquad %
-  \readlist\thecycle{1,2,3,4}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%
-, \qquad %
-  \readlist\thecycle{1,3}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%
-%
-  \readlist\thecycle{2,4}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%
-, \qquad %
-  \readlist\thecycle{1,4,3,4}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%\]</span>
-There are <span class="math inline">\(2\)</span> flips across the
-horizontal and vertical axes: <span class="math display">\[%
-  \readlist\thecycle{1,2}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%
-%
-  \readlist\thecycle{3,4}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%
-, \qquad %
-  \readlist\thecycle{1,4}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%
-%
-  \readlist\thecycle{2,3}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%\]</span> And
-there are <span class="math inline">\(2\)</span> flips across the
-diagonal axes: <span class="math display">\[%
-  \readlist\thecycle{1,3}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%
-, \qquad%
-  \readlist\thecycle{2,4}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%\]</span></p>
-<p>Thus, there are <span class="math inline">\(4\)</span> even
-permutations, namely <span class="math display">\[e,\qquad %
-  \readlist\thecycle{1,3}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%
-%
-  \readlist\thecycle{2,4}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%
-, \qquad %
-  \readlist\thecycle{1,2}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%
-%
-  \readlist\thecycle{3,4}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%
-, \qquad %
-  \readlist\thecycle{1,4}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%
-%
-  \readlist\thecycle{2,3}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%\]</span> and
-there are <span class="math inline">\(4\)</span> odd permutations,
-namely <span class="math display">\[%
-  \readlist\thecycle{1,2,3,4}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%
-, \qquad %
-  \readlist\thecycle{1,4,3,4}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%
-, \qquad %
-  \readlist\thecycle{1,3}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%
-, \qquad%
-  \readlist\thecycle{2,4}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%\]</span>
-Recall that a <span class="math inline">\(k\)</span>-cycle is the
-product of <span class="math inline">\(k-1\)</span> transpositions, so
-these length <span class="math inline">\(4\)</span>-cycles are the
-products of <span class="math inline">\(3\)</span> transpositions, so
-they are odd.</p>
-<p>We see that half of the elements of <span
-class="math inline">\(D_4\)</span> are even and half are odd.</p>
-<h1 id="s_4"><span class="math inline">\(S_4\)</span></h1>
-<p>The symmetric group <span class="math inline">\(S_4\)</span> has
-<span class="math inline">\(4!=24\)</span> permutations, and we saw in
-class that half of them are even and half are odd. So we are looking for
-<span class="math inline">\(12\)</span> even permutations (the elements
-of <span class="math inline">\(A_4\)</span>) and <span
-class="math inline">\(12\)</span> odd permutations.</p>
-<p>As we saw in lecture, the identity element <span
-class="math inline">\(e\)</span> is an even permutation.</p>
-<p>Now we count transpositions (which will be odd): The data of a
-transposition consists exactly of a choice of <span
-class="math inline">\(2\)</span> elements from <span
-class="math inline">\(\{1, 2, 3, 4\}\)</span>, namely, which two
-elements are being swapped. So there are <span
-class="math inline">\(\binom{4}{2}=6\)</span> transpositions, namely
-<span class="math display">\[%
-  \readlist\thecycle{1,2}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%
-,\quad %
-  \readlist\thecycle{1,3}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%
-,\quad %
-  \readlist\thecycle{1,4}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%
-,\quad %
-  \readlist\thecycle{2,3}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%
-,\quad %
-  \readlist\thecycle{2,4}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%
-,\quad %
-  \readlist\thecycle{3,4}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%\]</span></p>
-<p>Now we count products of <span class="math inline">\(2\)</span>
-distinct transpositions (which will be even permutations). There are
-<span class="math inline">\(2\)</span> kinds of such products: the
-transpositions can be disjoint, or they can have an element in common.
-In the first case, one transposition will swap the element <span
-class="math inline">\(1\)</span> with something, and one will not.
-Moreover, once we’ve chosen our first transposition, the second simply
-swaps the <span class="math inline">\(2\)</span> elements remaining. So
-we have <span class="math inline">\(3\)</span> such products: <span
-class="math display">\[%
-  \readlist\thecycle{1,2}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%
-%
-  \readlist\thecycle{3,4}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%
-,\quad %
-  \readlist\thecycle{1,3}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%
-%
-  \readlist\thecycle{2,4}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%
-,\quad %
-  \readlist\thecycle{1,4}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%
-%
-  \readlist\thecycle{2,3}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%\]</span> In
-the second case, we observe that the product <span
-class="math inline">\(%
-  \readlist\thecycle{a,b}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%
-%
-  \readlist\thecycle{a,c}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%\)</span> is
-the <span class="math inline">\(3\)</span>-cycle <span
-class="math inline">\(%
-  \readlist\thecycle{a,c,b}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%\)</span>, so
-it’s enough to count permutations represented by <span
-class="math inline">\(3\)</span>-cycles. If a <span
-class="math inline">\(3\)</span>-cycle contains <span
-class="math inline">\(1\)</span>, it has the form <span
-class="math inline">\(%
-  \readlist\thecycle{1,a,b}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%\)</span>, and
-there are <span class="math inline">\(3\)</span> choices for <span
-class="math inline">\(a\)</span> and then <span
-class="math inline">\(2\)</span> choices for <span
-class="math inline">\(b\)</span>. So this gives us <span
-class="math inline">\(6\)</span> permutations: <span
-class="math display">\[%
-  \readlist\thecycle{1,2,3}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%
-,\quad %
-  \readlist\thecycle{1,2,4}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%
-,\quad %
-  \readlist\thecycle{1,3,2}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%
-,\quad %
-  \readlist\thecycle{1,3,4}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%
-, \quad %
-  \readlist\thecycle{1,4,2}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%
-, \quad %
-  \readlist\thecycle{1,4,3}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%\]</span> If a
-<span class="math inline">\(3\)</span>-cycle in <span
-class="math inline">\(S_4\)</span> does not contain <span
-class="math inline">\(1\)</span>, it contains all of <span
-class="math inline">\(2, 3, 4\)</span>, and there are <span
-class="math inline">\(2\)</span> permutations we can make from them:
-<span class="math display">\[%
-  \readlist\thecycle{2,3,4}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%
-, \quad %
-  \readlist\thecycle{2,4,3}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%\]</span>
-Check for yourself that all of these <span
-class="math inline">\(3\)</span>-cycles represent different
-permutations! But note that (for example) <span class="math inline">\(%
-  \readlist\thecycle{1,2,3}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%\)</span> and
-<span class="math inline">\(%
-  \readlist\thecycle{2,3,1}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%\)</span>
-represent the same permutation, so these really are all of the
-permutations in <span class="math inline">\(S_4\)</span> represented by
-<span class="math inline">\(3\)</span>-cycles.</p>
-<p>There are <span class="math inline">\(6\)</span> elements of <span
-class="math inline">\(S_4\)</span> left to find, and we will see they
-are all <span class="math inline">\(4\)</span>-cycles; since <span
-class="math inline">\(4\)</span>-cycles are products of <span
-class="math inline">\(3\)</span> transpositions, they are odd. Now we
-can write any length-<span class="math inline">\(4\)</span> cycle in the
-form <span class="math inline">\(%
-  \readlist\thecycle{1,a,b,c}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%\)</span>,
-where <span class="math inline">\(\{a,b,c\}=\{2,3,4\}\)</span>. Thus,
-writing down a <span class="math inline">\(4\)</span>-cycle amounts to
-choosing an ordering for the elements of <span
-class="math inline">\(\{2,3,4\}\)</span>, and there are <span
-class="math inline">\(6\)</span> orderings. Explicitly, we have <span
-class="math display">\[%
-  \readlist\thecycle{1,2,3,4}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%
-,\quad %
-  \readlist\thecycle{1,2,4,3}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%
-, \quad%
-  \readlist\thecycle{1,3,2,4}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%
-, \quad %
-  \readlist\thecycle{1,3,4,2}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%
-, \quad %
-  \readlist\thecycle{1,4,2,3}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%
-, \quad %
-  \readlist\thecycle{1,4,3,2}%
-  (\foreachitem\i\in\thecycle{\ifnum\icnt=1\else\,\fi\i})%\]</span>
-Again, check for yourself explicitly that these are all different
-permutations.</p>
-<p>We have found <span class="math inline">\(24\)</span> elements of
-<span class="math inline">\(S_4\)</span>, so we have listed every
-element. Counting up the even and odd permutations above, we see that we
-have <span class="math inline">\(12\)</span> even permutations and <span
-class="math inline">\(12\)</span> odd permutations, which is exactly
-what our theorem from class said should happen.</p>
-</body>
+<!DOCTYPE html> 
+<html lang='en-US' xml:lang='en-US'> 
+<head><title>Even and Odd Permutations</title> 
+<meta charset='utf-8' /> 
+<meta content='TeX4ht (https://tug.org/tex4ht/)' name='generator' /> 
+<meta content='width=device-width,initial-scale=1' name='viewport' /> 
+<link href='even-odd.css' rel='stylesheet' type='text/css' /> 
+<meta content='even-odd.tex' name='src' /> 
+</head><body>
+<div class='maketitle'>
+<h2 class='titleHead'>
+EVEN AND ODD PERMUTATIONS
+</h2>
+<div class='submaketitle'>
+</div>
+</div>
+<!-- l. 31 --><p class='noindent'>This is a short note to describe explicitly which elements of <span class='cmmi-10'>S</span><sub><span class='cmr-7'>4</span></sub> (the symmetric group on 4 elements) and <span class='cmmi-10'>D</span><sub><span class='cmr-7'>4</span></sub> (the
+symmetries of a square) are even and which are odd. Recall that we can write every permutation <span class='cmmi-10'>σ </span>as a product of
+transpositions; then <span class='cmmi-10'>σ </span>is <span class='cmti-10'>even </span>if it is the product of an even number of transpositions, and <span class='cmti-10'>odd </span>if it is the product of
+an odd number of transpositions.
+</p>
+<h3 class='sectionHead' id='d'><span class='titlemark'>1. </span> <a id='x1-10001'></a><span class='cmmi-10'>D</span><sub><span class='cmr-7'>4</span></sub></h3>
+<!-- l. 35 --><p class='noindent'>Let’s number the vertices of our square as 1, 2, 3, and 4 (in order as we go around the square clockwise). In class
+we described the symmetries explicitly: There are 4 rotations of the square, which we can write as
+permutations
+</p>
+<div class='math-display'>
+<img alt='e,    (1 234),    (1 3)(24),    (1 434)
+' class='math-display' src='even-odd0x.png' /></div>
+<!-- l. 37 --><p class='noindent'>There are 2 flips across the horizontal and vertical axes:
+</p>
+<div class='math-display'>
+<img alt='(12)(34),    (14)(2 3)
+' class='math-display' src='even-odd1x.png' /></div>
+<!-- l. 39 --><p class='noindent'>And there are 2 flips across the diagonal axes:
+
+</p>
+<div class='math-display'>
+<img alt='(13),    (24)
+' class='math-display' src='even-odd2x.png' /></div>
+<!-- l. 42 --><p class='noindent'>Thus, there are 4 even permutations, namely
+</p>
+<div class='math-display'>
+<img alt='e,    (1 3)(24),    (1 2)(34),    (1 4)(23)
+' class='math-display' src='even-odd3x.png' /></div>
+<!-- l. 44 --><p class='noindent'>and there are 4 odd permutations, namely
+</p>
+<div class='math-display'>
+<img alt='(1 234),   (14 34),   (13),    (2 4)
+' class='math-display' src='even-odd4x.png' /></div>
+<!-- l. 46 --><p class='noindent'>Recall that a <span class='cmmi-10'>k</span>-cycle is the product of <span class='cmmi-10'>k </span><span class='cmsy-10'>− </span>1 transpositions, so these length 4-cycles are the products of 3
+transpositions, so they are odd.
+</p><!-- l. 48 --><p class='noindent'>We see that half of the elements of <span class='cmmi-10'>D</span><sub><span class='cmr-7'>4</span></sub> are even and half are odd.
+</p>
+<h3 class='sectionHead' id='s'><span class='titlemark'>2. </span> <a id='x1-20002'></a><span class='cmmi-10'>S</span><sub><span class='cmr-7'>4</span></sub></h3>
+<!-- l. 52 --><p class='noindent'>The symmetric group <span class='cmmi-10'>S</span><sub><span class='cmr-7'>4</span></sub> has 4! = 24 permutations, and we saw in class that half of them are even and half are odd.
+So we are looking for 12 even permutations (the elements of <span class='cmmi-10'>A</span><sub><span class='cmr-7'>4</span></sub>) and 12 odd permutations.
+</p><!-- l. 54 --><p class='noindent'>As we saw in lecture, the identity element <span class='cmmi-10'>e </span>is an even permutation.
+
+</p><!-- l. 56 --><p class='noindent'>Now we count transpositions (which will be odd): The data of a transposition consists exactly of a choice of 2
+elements from <span class='cmsy-10'>{</span>1<span class='cmmi-10'>,</span>2<span class='cmmi-10'>,</span>3<span class='cmmi-10'>,</span>4<span class='cmsy-10'>}</span>, namely, which two elements are being swapped. So there are <img alt='(4)
+ 2' src='even-odd5x.png' /> = 6 transpositions,
+namely
+</p>
+<div class='math-display'>
+<img alt='(1 2),  (13), (14),  (23), (24),  (34)
+' class='math-display' src='even-odd6x.png' /></div>
+<!-- l. 59 --><p class='noindent'>Now we count products of 2 distinct transpositions (which will be even permutations). There are 2 kinds of such
+products: the transpositions can be disjoint, or they can have an element in common. In the first case,
+one transposition will swap the element 1 with something, and one will not. Moreover, once we’ve
+chosen our first transposition, the second simply swaps the 2 elements remaining. So we have 3 such
+products:
+</p>
+<div class='math-display'>
+<img alt='(1 2)(34),  (13)(2 4),  (14)(2 3)
+' class='math-display' src='even-odd7x.png' /></div>
+<!-- l. 61 --><p class='noindent'>In the second case, we observe that the product (<span class='cmmi-10'>ab</span>)(<span class='cmmi-10'>ac</span>) is the 3-cycle (<span class='cmmi-10'>acb</span>), so it’s enough to count permutations
+represented by 3-cycles. If a 3-cycle contains 1, it has the form (1<span class='cmmi-10'>ab</span>), and there are 3 choices for <span class='cmmi-10'>a </span>and then 2
+choices for <span class='cmmi-10'>b</span>. So this gives us 6 permutations:
+</p>
+<div class='math-display'>
+<img alt='(1 23), (12 4),  (132),  (134),  (1 42), (14 3)
+' class='math-display' src='even-odd8x.png' /></div>
+<!-- l. 63 --><p class='noindent'>If a 3-cycle in <span class='cmmi-10'>S</span><sub><span class='cmr-7'>4</span></sub> does not contain 1, it contains all of 2<span class='cmmi-10'>,</span>3<span class='cmmi-10'>,</span>4, and there are 2 permutations we can make from
+them:
+
+</p>
+<div class='math-display'>
+<img alt='(234),  (243)
+' class='math-display' src='even-odd9x.png' /></div>
+<!-- l. 65 --><p class='noindent'>Check for yourself that all of these 3-cycles represent different permutations! But note that (for example) (123) and
+(231) represent the same permutation, so these really are all of the permutations in <span class='cmmi-10'>S</span><sub><span class='cmr-7'>4</span></sub> represented by
+3-cycles.
+</p><!-- l. 67 --><p class='noindent'>There are 6 elements of <span class='cmmi-10'>S</span><sub><span class='cmr-7'>4</span></sub> left to find, and we will see they are all 4-cycles; since 4-cycles are products of 3
+transpositions, they are odd. Now we can write any length-4 cycle in the form (1<span class='cmmi-10'>abc</span>), where <span class='cmsy-10'>{</span><span class='cmmi-10'>a,b,c</span><span class='cmsy-10'>} </span>= <span class='cmsy-10'>{</span>2<span class='cmmi-10'>,</span>3<span class='cmmi-10'>,</span>4<span class='cmsy-10'>}</span>.
+Thus, writing down a 4-cycle amounts to choosing an ordering for the elements of <span class='cmsy-10'>{</span>2<span class='cmmi-10'>,</span>3<span class='cmmi-10'>,</span>4<span class='cmsy-10'>}</span>, and there are 6
+orderings. Explicitly, we have
+</p>
+<div class='math-display'>
+<img alt='(1234),  (1243),  (1324),  (1342),  (1423),  (1432)
+' class='math-display' src='even-odd10x.png' /></div>
+<!-- l. 69 --><p class='noindent'>Again, check for yourself explicitly that these are all different permutations.
+</p><!-- l. 71 --><p class='noindent'>We have found 24 elements of <span class='cmmi-10'>S</span><sub><span class='cmr-7'>4</span></sub>, so we have listed every element. Counting up the even and odd permutations
+above, we see that we have 12 even permutations and 12 odd permutations, which is exactly what our theorem from
+class said should happen.
+</p>
+ 
+</body> 
 </html>
